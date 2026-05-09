@@ -33,9 +33,23 @@
             background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
             background-size: 40px 40px;
         }
+        /* Scrollbar styles for modals */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ff9d;
+        }
     </style>
 </head>
-<body class="bg-grid">
+<body class="bg-grid relative">
 
     <!-- HERO SECTION -->
     <header class="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
@@ -55,17 +69,16 @@
                 Premium Web Design for Exclusive Brands
             </div>
             <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight md:leading-tight">
-                We don't attract views, <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">we attract clients</span>
+                We don't chase views, <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">we attract clients</span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
-                I was tired of seeing websites that don't convert, so I founded <strong class="text-gray-100 font-semibold">Aether</strong>.
+                I was tired of seeing websites that don't convert, that's why I founded <strong class="text-gray-100 font-semibold">Aether</strong>.
             </p>
             
             <div class="pt-6">
                 <p class="text-lg text-gray-500 mb-6 font-medium">By Hugo Pérez — Aether</p>
-                <!-- Modificado: Abre el modal de agendamiento en lugar de hacer scroll -->
                 <button 
-                    onclick="openModal('bookingModal')"
+                    onclick="openBookingModal()"
                     class="glow-button bg-[#00ff9d] text-black px-10 py-5 rounded-full text-xl font-bold uppercase tracking-wide hover:bg-[#05eb92]">
                     BOOK YOUR FREE CALL
                 </button>
@@ -74,10 +87,10 @@
         </div>
     </header>
 
-    <!-- BENEFITS -->
+    <!-- BENEFITS SECTION -->
     <section class="py-24 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">Your website shouldn't just look good,<br><span class="text-[#00ff9d]">it should drive results</span></h2>
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">Your website won't just look good,<br><span class="text-[#00ff9d]">it will drive results</span></h2>
             <div class="w-20 h-1 bg-[#00ff9d] mx-auto rounded-full"></div>
         </div>
 
@@ -87,7 +100,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                 </div>
                 <h3 class="text-2xl font-bold mb-4">✦ Aether Design</h3>
-                <p class="text-gray-400 leading-relaxed">It's boring to hire us—the thrill is gone when you realize you no longer have any competition.</p>
+                <p class="text-gray-400 leading-relaxed">Hiring us almost feels like cheating; the game gets boring when you leave your competition behind.</p>
             </div>
             
             <div class="card-hover p-8 bg-[#111] border border-gray-800 rounded-3xl">
@@ -95,15 +108,15 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
                 </div>
                 <h3 class="text-2xl font-bold mb-4">✦ Optimization</h3>
-                <p class="text-gray-400 leading-relaxed">Ultra-fast loading speeds, technical SEO, and strategic call-to-actions designed to sell.</p>
+                <p class="text-gray-400 leading-relaxed">Lightning-fast load speeds, technical SEO, and strategic calls-to-action designed to sell more.</p>
             </div>
 
             <div class="card-hover p-8 bg-[#111] border border-gray-800 rounded-3xl">
                 <div class="w-12 h-12 bg-emerald-950/50 rounded-2xl flex items-center justify-center mb-6 text-[#00ff9d]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">✦ Bespoke Solutions</h3>
-                <p class="text-gray-400 leading-relaxed">Tailored entirely to your brand, values, and unique goals. No generic templates allowed.</p>
+                <h3 class="text-2xl font-bold mb-4">✦ Customization</h3>
+                <p class="text-gray-400 leading-relaxed">Fully tailored to your unique brand, values, and goals. We never use generic templates.</p>
             </div>
         </div>
     </section>
@@ -112,25 +125,25 @@
     <section class="py-24 bg-[#0d0d0d]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold">What's included in your project</h2>
+                <h2 class="text-3xl md:text-5xl font-bold">Here is what your project includes</h2>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="flex items-start space-x-4 p-6 bg-[#161616] rounded-2xl border border-gray-800/50 hover:bg-[#1a1a1a] transition-colors">
                     <div class="text-[#00ff9d] mt-1 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-                    <div><h4 class="font-bold text-lg mb-1">Responsive & Mobile First</h4><p class="text-gray-400 text-sm text-balance">A flawless experience on smartphones, tablets, and desktops.</p></div>
+                    <div><h4 class="font-bold text-lg mb-1">Responsive & Mobile First</h4><p class="text-gray-400 text-sm text-balance">A flawless experience across smartphones and tablets.</p></div>
                 </div>
                 <div class="flex items-start space-x-4 p-6 bg-[#161616] rounded-2xl border border-gray-800/50 hover:bg-[#1a1a1a] transition-colors">
                     <div class="text-[#00ff9d] mt-1 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-                    <div><h4 class="font-bold text-lg mb-1">Advanced SEO Foundation</h4><p class="text-gray-400 text-sm text-balance">Ensuring Google finds and ranks your brand from day one.</p></div>
+                    <div><h4 class="font-bold text-lg mb-1">Basic SEO Optimization</h4><p class="text-gray-400 text-sm text-balance">Optimized so Google finds you from day one.</p></div>
                 </div>
                 <div class="flex items-start space-x-4 p-6 bg-[#161616] rounded-2xl border border-gray-800/50 hover:bg-[#1a1a1a] transition-colors">
                     <div class="text-[#00ff9d] mt-1 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-                    <div><h4 class="font-bold text-lg mb-1">Delivery + Walkthrough</h4><p class="text-gray-400 text-sm text-balance">Launch-ready site + a video call to teach you how to manage it.</p></div>
+                    <div><h4 class="font-bold text-lg mb-1">Handover + Guide</h4><p class="text-gray-400 text-sm text-balance">Ready-to-launch website plus a video call to teach you how to manage it.</p></div>
                 </div>
                 <div class="flex items-start space-x-4 p-6 bg-[#161616] rounded-2xl border border-gray-800/50 hover:bg-[#1a1a1a] transition-colors">
                     <div class="text-[#00ff9d] mt-1 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-                    <div><h4 class="font-bold text-lg mb-1">Seamless Integrations</h4><p class="text-gray-400 text-sm text-balance">From social media feeds to high-end portfolio galleries.</p></div>
+                    <div><h4 class="font-bold text-lg mb-1">Seamless Integrations</h4><p class="text-gray-400 text-sm text-balance">We integrate your social media accounts and existing portfolios smoothly.</p></div>
                 </div>
             </div>
         </div>
@@ -139,7 +152,7 @@
     <!-- PORTFOLIO / BIO SECTION -->
     <section class="py-24 px-6 max-w-7xl mx-auto">
         <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-[#111]/80 backdrop-blur-sm p-8 md:p-12 rounded-[40px] border border-gray-800/60 shadow-2xl">
-            <!-- Bio Logo Decoration -->
+            <!-- Logo Top Right Bio -->
             <div class="absolute top-6 right-6 md:top-10 md:right-10 z-20 pointer-events-none md:pointer-events-auto">
                 <div class="h-14 w-32 md:h-16 md:w-40 bg-gradient-to-r from-emerald-400 to-emerald-200 opacity-40 drop-shadow-[0_0_10px_rgba(0,255,157,0.1)] hover:opacity-100 transition-all duration-300 hover:scale-105"
                      style="-webkit-mask-image: url('https://i.postimg.cc/t4sKnKpv/Gemini-Generated-Image-tgamittgamittgam-removebg-preview.png'); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: right center; mask-image: url('https://i.postimg.cc/t4sKnKpv/Gemini-Generated-Image-tgamittgamittgam-removebg-preview.png'); mask-size: contain; mask-repeat: no-repeat; mask-position: right center;"
@@ -158,36 +171,36 @@
                 <h2 class="text-3xl md:text-5xl font-bold leading-tight">I'm Hugo Pérez,<br>founder of <span class="text-[#00ff9d]">Aether.</span></h2>
                 <div class="w-16 h-1 bg-[#00ff9d] rounded-full"></div>
                 <p class="text-gray-300 text-xl md:text-2xl leading-relaxed font-light">
-                    I'll be direct with you. You're going to attract high-value clients, project a world-class image, and <strong class="text-white font-semibold">leave the word "competition" behind forever.</strong>
+                    I'll be straight with you. You are going to attract new clients, project a high-end professional image, and <strong class="text-white font-semibold">the word 'competition' will no longer exist for you</strong>.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- BONUS -->
+    <!-- BONUSES -->
     <section class="py-24 px-6 max-w-7xl mx-auto">
         <div class="bg-gradient-to-br from-[#111] to-[#0a0a0a] border-l-8 border-[#00ff9d] p-12 rounded-3xl relative overflow-hidden">
             <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                 <svg width="200" height="200" viewBox="0 0 24 24" fill="#00ff9d"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
             </div>
             
-            <h2 class="text-3xl md:text-4xl font-bold mb-10 leading-tight">Book your call this week,<br>and unlock these bonuses:</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 leading-tight">If you book your call this week,<br>you get these bonuses:</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
                 <div class="space-y-2">
                     <div class="text-sm font-bold text-[#00ff9d]">BONUS 1</div>
-                    <h4 class="text-xl font-bold">Premium Copywriting</h4>
-                    <p class="text-gray-400">High-conversion, persuasive texts written by experts included in your site.</p>
+                    <h4 class="text-xl font-bold">Premium Copywriting Pack</h4>
+                    <p class="text-gray-400">Persuasive, expert-written sales copy integrated directly into your new website.</p>
                 </div>
                 <div class="space-y-2">
                     <div class="text-sm font-bold text-[#00ff9d]">BONUS 2</div>
                     <h4 class="text-xl font-bold">Conversion Strategy</h4>
-                    <p class="text-gray-400">A full review and optimization of your current sales funnel.</p>
+                    <p class="text-gray-400">A complete, deep-dive review and optimization plan of your current sales funnel.</p>
                 </div>
                 <div class="space-y-2">
                     <div class="text-sm font-bold text-[#00ff9d]">BONUS 3</div>
-                    <h4 class="text-xl font-bold">Priority Support</h4>
-                    <p class="text-gray-400">Free technical maintenance and priority updates for your first month.</p>
+                    <h4 class="text-xl font-bold">1 Extra Month</h4>
+                    <p class="text-gray-400">Free priority technical maintenance and support during your first month live.</p>
                 </div>
             </div>
         </div>
@@ -196,403 +209,377 @@
     <!-- GUARANTEE -->
     <section class="py-24 px-6">
         <div class="max-w-4xl mx-auto bg-emerald-950/20 border border-emerald-500/30 p-12 rounded-[40px] text-center shadow-2xl shadow-emerald-900/10">
-            <h2 class="text-3xl font-bold mb-6 italic text-[#00ff9d]">The Aether Satisfaction Guarantee</h2>
+            <h2 class="text-3xl font-bold mb-6 italic text-[#00ff9d]">Aether Satisfaction Guarantee</h2>
             <p class="text-xl md:text-2xl text-emerald-50/90 font-light leading-relaxed">
-                "If you are not <span class="font-semibold text-[#00ff9d]">100% satisfied</span> with the final result, we will work tirelessly until it is perfect. Your success is my only priority."
+                "If you are not <span class="font-semibold text-[#00ff9d]">100% satisfied</span> with the final result once the website is delivered, we will work tirelessly together until it is absolutely perfect. My priority is your success."
             </p>
         </div>
     </section>
 
+    <!-- TESTIMONIALS -->
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">Don't take my word for it.<br><span class="text-[#00ff9d]">Trust their results.</span></h2>
+            <div class="w-20 h-1 bg-[#00ff9d] mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div class="card-hover p-8 bg-[#111] border border-gray-800 rounded-3xl relative">
+                <div class="absolute -top-5 -left-2 text-[#00ff9d] opacity-20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex mb-4 text-[#00ff9d]">
+                        ★★★★★
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-8 font-light italic">"I've had several websites before, but nothing like this. Hugo helped me from day one. Incredibly professional and has undoubtedly brought more clients to my business. 10/10."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-900/40 rounded-full flex items-center justify-center text-[#00ff9d] font-bold text-lg border border-emerald-500/30">EV</div>
+                        <div>
+                            <h4 class="font-bold text-white">Elena V.</h4>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Beauty & Aesthetics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="card-hover p-8 bg-[#111] border border-gray-800 rounded-3xl relative">
+                <div class="absolute -top-5 -left-2 text-[#00ff9d] opacity-20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex mb-4 text-[#00ff9d]">
+                        ★★★★★
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-8 font-light italic">"I was blown away by how Hugo and his team work. They explained the Aether methodology and helped me build a solid strategy for my business. The site is amazing, and we're getting way more clients."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-900/40 rounded-full flex items-center justify-center text-[#00ff9d] font-bold text-lg border border-emerald-500/30">FP</div>
+                        <div>
+                            <h4 class="font-bold text-white">Fernando P.</h4>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Food & Beverage Sector</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="card-hover p-8 bg-[#111] border border-gray-800 rounded-3xl relative">
+                <div class="absolute -top-5 -left-2 text-[#00ff9d] opacity-20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex mb-4 text-[#00ff9d]">
+                        ★★★★★
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-8 font-light italic">"We hardly even spend on ads anymore. Clients find us through the website and booking is frictionless now. They also optimized my existing sales funnel. Without a doubt, my best investment."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-900/40 rounded-full flex items-center justify-center text-[#00ff9d] font-bold text-lg border border-emerald-500/30">DM</div>
+                        <div>
+                            <h4 class="font-bold text-white">David M.</h4>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Financial Consultant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FINAL CTA -->
-    <section id="contacto" class="py-32 px-6 text-center bg-black relative">
+    <section class="py-32 px-6 text-center bg-black relative">
         <div class="max-w-4xl mx-auto space-y-10">
-            <h2 class="text-4xl md:text-6xl font-extrabold leading-tight">Ready for the website your brand deserves?</h2>
+            <h2 class="text-4xl md:text-6xl font-extrabold leading-tight">Ready to get the website your brand deserves?</h2>
             <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
-                Book a free 30-minute discovery call.<br>
-                We'll analyze your project and I'll give you a tailored proposal.
+                Book a free, no-obligation 30-minute strategy session.<br>
+                We'll analyze your project and I'll give you a custom proposal.
             </p>
             
             <div class="pt-6">
-                <!-- Modificado: Abre el modal de agendamiento -->
                 <button 
-                    onclick="openModal('bookingModal')"
+                    onclick="openBookingModal()"
                     class="glow-button bg-[#00ff9d] text-black px-12 py-6 rounded-full text-2xl font-black uppercase tracking-wider hover:bg-[#05eb92]">
                     BOOK YOUR CALL NOW
                 </button>
                 <p class="mt-8 text-gray-500 font-medium tracking-wide uppercase">
-                    Only 2 spots left this month
+                    Only 2 spots left
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER WITH LEGAL LINKS -->
-    <footer class="py-12 px-6 border-t border-gray-900 text-center text-gray-500 text-sm bg-black relative z-10">
-        <div class="max-w-7xl mx-auto space-y-6">
+    <footer class="py-12 px-6 border-t border-gray-900 text-center text-gray-500 text-sm bg-black">
+        <div class="max-w-7xl mx-auto space-y-4">
             <p class="text-gray-300 font-bold tracking-widest uppercase">Hugo Pérez • Aether © 2026</p>
-            <p class="text-xs uppercase tracking-widest text-[#00ff9d]">High-End Premium Web Engineering</p>
+            <p class="text-xs uppercase tracking-widest text-[#00ff9d]">High-End Premium Web Design</p>
             
             <!-- Legal Links -->
-            <div class="flex flex-wrap justify-center gap-4 mt-6 text-xs md:text-sm">
-                <button onclick="openModal('legalNoticeModal')" class="hover:text-[#00ff9d] transition-colors">Legal Notice</button>
-                <span class="text-gray-700">|</span>
-                <button onclick="openModal('privacyPolicyModal')" class="hover:text-[#00ff9d] transition-colors">Privacy Policy</button>
-                <span class="text-gray-700">|</span>
-                <button onclick="openModal('termsModal')" class="hover:text-[#00ff9d] transition-colors">Terms of Service</button>
+            <div class="flex justify-center items-center gap-4 pt-4 text-xs">
+                <button onclick="openModal('modal-legal')" class="hover:text-white transition-colors">Legal Notice</button>
+                <span>|</span>
+                <button onclick="openModal('modal-privacy')" class="hover:text-white transition-colors">Privacy Policy</button>
+                <span>|</span>
+                <button onclick="openModal('modal-terms')" class="hover:text-white transition-colors">Terms of Service</button>
             </div>
-
-            <div class="pt-4 flex justify-center text-xs italic">
-                <span>Zaragoza, Spain | Serving Worldwide</span>
+            
+            <div class="pt-2 flex justify-center text-xs italic">
+                <span>Zaragoza, Spain</span>
             </div>
         </div>
     </footer>
 
-    <!-- MODALS OVERLAYS -->
-    <!-- Booking Modal (Nuevo Calendario) -->
-    <div id="bookingModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-md opacity-0 transition-opacity duration-300">
-        <div class="bg-[#111] border border-gray-800 rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col md:flex-row">
+    <!-- BOOKING MODAL -->
+    <div id="modal-booking" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md transition-opacity" onclick="closeModal('modal-booking')"></div>
+        <div class="relative bg-[#0f0f0f] border border-emerald-500/20 w-full max-w-xl overflow-hidden rounded-[32px] shadow-2xl flex flex-col">
             
-            <button onclick="closeModal('bookingModal')" class="absolute top-4 right-4 md:top-6 md:right-6 text-gray-400 hover:text-white z-10 bg-black/50 p-2 rounded-full backdrop-blur-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-
-            <!-- Panel Izquierdo: Info de la llamada -->
-            <div class="w-full md:w-1/3 bg-black/50 p-8 border-r border-gray-800 flex flex-col justify-between">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-gray-800 flex justify-between items-center bg-[#141414]">
                 <div>
-                    <div class="w-16 h-16 bg-emerald-950/50 rounded-2xl flex items-center justify-center mb-6 text-[#00ff9d] border border-emerald-900/50">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-2 text-white">Discovery Call</h2>
-                    <p class="text-gray-400 mb-6">With Hugo Pérez</p>
-                    
-                    <div class="space-y-4 text-sm text-gray-300">
-                        <div class="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                            <span>30 minutes</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            <span>Phone / WhatsApp</span>
-                        </div>
+                    <h3 class="text-xl font-bold text-[#00ff9d]">Book Strategy Session</h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest mt-1">30 minutes • Hugo Pérez</p>
+                </div>
+                <button onclick="closeModal('modal-booking')" class="text-gray-500 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-6 overflow-y-auto max-h-[70vh]">
+                <div>
+                    <label class="text-sm font-semibold text-gray-400 uppercase tracking-tighter mb-3 block">1. Select the day</label>
+                    <div id="calendar-grid" class="grid grid-cols-7 gap-2 text-center text-xs">
+                        <!-- Generated by JS -->
                     </div>
                 </div>
-                <div class="mt-8 pt-6 border-t border-gray-800 text-xs text-gray-500">
-                    We'll analyze your current situation and see if we're the perfect fit to work together.
+
+                <div>
+                    <label class="text-sm font-semibold text-gray-400 uppercase tracking-tighter mb-3 block">2. Select the time (EST)</label>
+                    <div id="time-grid" class="grid grid-cols-3 gap-2">
+                        <!-- Generated by JS -->
+                    </div>
                 </div>
             </div>
 
-            <!-- Panel Derecho: Selector -->
-            <div class="w-full md:w-2/3 p-8">
-                <h3 class="text-xl font-bold mb-6">Select a date and time</h3>
-                
-                <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-6">
-                    <!-- Selector de Día (Simulado para los próximos días) -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-3">Available Day</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="dateGrid">
-                            <!-- Los botones se generarán por JS -->
-                        </div>
-                        <input type="hidden" id="selectedDate" required>
-                    </div>
-
-                    <!-- Selector de Hora -->
-                    <div id="timeSelector" class="hidden opacity-0 transition-opacity duration-300">
-                        <label class="block text-sm font-medium text-gray-400 mb-3">Time (Central European Time - CET/CEST)</label>
-                        <div class="grid grid-cols-3 gap-3" id="timeGrid">
-                            <button type="button" class="time-btn py-2 border border-gray-700 rounded-lg text-sm hover:border-[#00ff9d] hover:text-[#00ff9d] transition-colors" data-time="10:00">10:00</button>
-                            <button type="button" class="time-btn py-2 border border-gray-700 rounded-lg text-sm hover:border-[#00ff9d] hover:text-[#00ff9d] transition-colors" data-time="11:30">11:30</button>
-                            <button type="button" class="time-btn py-2 border border-gray-700 rounded-lg text-sm hover:border-[#00ff9d] hover:text-[#00ff9d] transition-colors" data-time="16:00">16:00</button>
-                            <button type="button" class="time-btn py-2 border border-gray-700 rounded-lg text-sm hover:border-[#00ff9d] hover:text-[#00ff9d] transition-colors" data-time="17:30">17:30</button>
-                            <button type="button" class="time-btn py-2 border border-gray-700 rounded-lg text-sm hover:border-[#00ff9d] hover:text-[#00ff9d] transition-colors" data-time="18:00">18:00</button>
-                            <button type="button" class="time-btn py-2 border border-gray-700 rounded-lg text-sm hover:border-[#00ff9d] hover:text-[#00ff9d] transition-colors" data-time="19:30">19:30</button>
-                        </div>
-                        <input type="hidden" id="selectedTime" required>
-                    </div>
-
-                    <!-- Datos del usuario -->
-                    <div id="userDetails" class="hidden opacity-0 transition-opacity duration-300 space-y-4 pt-4 border-t border-gray-800">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">Full Name</label>
-                                <input type="text" id="userName" required class="w-full bg-black border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00ff9d] transition-colors">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">Company / Project</label>
-                                <input type="text" id="userCompany" required class="w-full bg-black border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00ff9d] transition-colors">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-400 mb-1">Briefly, what do you need?</label>
-                            <textarea id="userNeeds" rows="2" required class="w-full bg-black border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00ff9d] transition-colors resize-none"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full bg-[#00ff9d] text-black font-bold py-3 rounded-lg hover:bg-[#05eb92] transition-colors mt-4">
-                            Confirm Booking via WhatsApp
-                        </button>
-                    </div>
-                </form>
+            <!-- Modal Footer -->
+            <div class="p-6 bg-[#141414] border-t border-gray-800">
+                <button 
+                    id="confirm-booking-btn"
+                    disabled
+                    onclick="sendWhatsAppBooking()"
+                    class="w-full py-4 bg-emerald-500 text-black font-black uppercase tracking-widest rounded-2xl disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#00ff9d] transition-all transform active:scale-95">
+                    Confirm and Book
+                </button>
+                <p class="text-[10px] text-gray-500 text-center mt-3 uppercase tracking-tighter">WhatsApp will open to complete your booking</p>
             </div>
         </div>
     </div>
 
-    <!-- Legal Notice Modal -->
-    <div id="legalNoticeModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-        <div class="bg-[#111] border border-gray-800 rounded-3xl p-8 max-w-3xl w-full max-h-[80vh] overflow-y-auto relative shadow-2xl transform scale-95 transition-transform duration-300">
-            <button onclick="closeModal('legalNoticeModal')" class="absolute top-6 right-6 text-gray-400 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <h2 class="text-2xl font-bold mb-6 text-[#00ff9d]">Legal Notice</h2>
-            <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
-                <p>In accordance with the provisions of applicable regulations on Information Society Services and Electronic Commerce, the general information details of this website are provided below:</p>
+    <!-- LEGAL MODALS -->
+    
+    <!-- Legal Notice -->
+    <div id="modal-legal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-legal')"></div>
+        <div class="relative bg-[#111] border border-gray-800 w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-[80vh]">
+            <div class="p-6 border-b border-gray-800 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-white">Legal Notice</h3>
+                <button onclick="closeModal('modal-legal')" class="text-gray-500 hover:text-white"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="p-6 overflow-y-auto text-gray-300 text-sm space-y-4">
+                <p>In compliance with international and Spanish regulations regarding Information Society Services and Electronic Commerce (LSSI-CE), the following identifying details are provided:</p>
                 <ul class="list-disc pl-5 space-y-2">
-                    <li><strong>Owner:</strong> Hugo Pérez</li>
+                    <li><strong>Website Owner:</strong> Hugo Pérez</li>
                     <li><strong>ID (DNI):</strong> 26055790X</li>
                     <li><strong>Address:</strong> Calle La Milagrosa 30, Zaragoza, Spain</li>
-                    <li><strong>Business Name:</strong> Aether Web Design</li>
+                    <li><strong>Trade Name:</strong> Aether Design</li>
                 </ul>
-                <p><strong>Object:</strong><br>
-                This website has been designed to publicize the services offered by Aether Web Design, consisting of premium web design and development services.</p>
-                <p><strong>Intellectual and Industrial Property:</strong><br>
-                The intellectual property rights of the page, its source code, design, navigation structures, and the various elements contained therein are the property of Hugo Pérez, to whom corresponds the exclusive exercise of the rights of exploitation thereof in any form.</p>
+                <p>This website aims to provide premium web design services for international clients, strictly adhering to the current legal framework.</p>
             </div>
         </div>
     </div>
 
-    <!-- Privacy Policy Modal -->
-    <div id="privacyPolicyModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-        <div class="bg-[#111] border border-gray-800 rounded-3xl p-8 max-w-3xl w-full max-h-[80vh] overflow-y-auto relative shadow-2xl transform scale-95 transition-transform duration-300">
-            <button onclick="closeModal('privacyPolicyModal')" class="absolute top-6 right-6 text-gray-400 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <h2 class="text-2xl font-bold mb-6 text-[#00ff9d]">Privacy Policy</h2>
-            <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
-                <p><strong>1. Data Controller</strong><br>
-                Identity: Hugo Pérez (DNI: 26055790X)<br>
-                Postal Address: Calle La Milagrosa 30, Zaragoza, Spain.</p>
+    <!-- Privacy Policy -->
+    <div id="modal-privacy" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-privacy')"></div>
+        <div class="relative bg-[#111] border border-gray-800 w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-[80vh]">
+            <div class="p-6 border-b border-gray-800 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-white">Privacy Policy</h3>
+                <button onclick="closeModal('modal-privacy')" class="text-gray-500 hover:text-white"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="p-6 overflow-y-auto text-gray-300 text-sm space-y-4">
+                <h4 class="font-bold text-white">1. Data Controller</h4>
+                <p>The entity responsible for processing your data is Hugo Pérez, operating under the brand Aether Design, located at Calle La Milagrosa 30, Zaragoza, Spain.</p>
                 
-                <p><strong>2. Purpose of Data Processing</strong><br>
-                We process the information provided by interested parties in order to manage requests for information, coordinate consultation calls, and, where appropriate, maintain the commercial relationship.</p>
+                <h4 class="font-bold text-white">2. Purpose of Data Processing</h4>
+                <p>We process the personal data you provide (such as your phone number via WhatsApp or booking forms) solely to schedule strategy sessions, answer your inquiries, and provide the web design services requested.</p>
 
-                <p><strong>3. Data Retention</strong><br>
-                Personal data provided will be kept as long as the commercial relationship is maintained or its deletion is not requested by the interested party.</p>
-
-                <p><strong>4. Legitimation</strong><br>
-                The legal basis for the processing of your data is the consent provided by you when requesting information or booking a call.</p>
-
-                <p><strong>5. Recipients</strong><br>
-                Data will not be communicated to third parties, except legal obligation.</p>
-
-                <p><strong>6. User Rights</strong><br>
-                Anyone has the right to obtain confirmation about whether we are processing personal data concerning them. You have the right to access your personal data, rectify inaccurate data, or request its deletion.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terms of Service Modal -->
-    <div id="termsModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-        <div class="bg-[#111] border border-gray-800 rounded-3xl p-8 max-w-3xl w-full max-h-[80vh] overflow-y-auto relative shadow-2xl transform scale-95 transition-transform duration-300">
-            <button onclick="closeModal('termsModal')" class="absolute top-6 right-6 text-gray-400 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <h2 class="text-2xl font-bold mb-6 text-[#00ff9d]">Terms of Service</h2>
-            <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
-                <p>These General Conditions regulate the use of this website, owned by Hugo Pérez (Aether Web Design).</p>
+                <h4 class="font-bold text-white">3. Data Retention</h4>
+                <p>Your data will be kept for the duration of the commercial relationship or as long as necessary to comply with legal obligations.</p>
                 
-                <p><strong>1. Services Offered</strong><br>
-                Aether provides premium web design, development, and conversion optimization services. Specific project details, timelines, and costs are agreed upon individually via proposals after the initial consultation.</p>
-
-                <p><strong>2. User Obligations</strong><br>
-                The user agrees to use the website and its services appropriately and lawfully, avoiding any activity that could damage, disable, or overburden the site.</p>
-
-                <p><strong>3. Satisfaction Guarantee</strong><br>
-                Our stated guarantee implies that we will perform reasonable revisions within the agreed scope of the project until the client approves the final design, prior to final delivery and code handover. It does not cover unlimited ongoing changes post-launch unless a maintenance contract is signed.</p>
-
-                <p><strong>4. Applicable Law and Jurisdiction</strong><br>
-                These conditions are governed by Spanish law. For any dispute that may arise regarding the interpretation or application of these conditions, the parties submit to the jurisdiction of the courts of Zaragoza, Spain, expressly waiving any other jurisdiction that may correspond to them.</p>
+                <h4 class="font-bold text-white">4. Your Rights</h4>
+                <p>You have the right to access, rectify, or delete your data, as well as restrict its processing. To exercise these rights, simply contact us directly via the provided communication channels.</p>
             </div>
         </div>
     </div>
 
-    <!-- Modal Logic -->
+    <!-- Terms of Service -->
+    <div id="modal-terms" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-terms')"></div>
+        <div class="relative bg-[#111] border border-gray-800 w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-[80vh]">
+            <div class="p-6 border-b border-gray-800 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-white">Terms of Service</h3>
+                <button onclick="closeModal('modal-terms')" class="text-gray-500 hover:text-white"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="p-6 overflow-y-auto text-gray-300 text-sm space-y-4">
+                <h4 class="font-bold text-white">1. Scope of Services</h4>
+                <p>Aether Design (Hugo Pérez) provides premium web design, SEO optimization, and strategy consulting. Project scope, deliverables, and timelines will be agreed upon during our initial strategy sessions.</p>
+
+                <h4 class="font-bold text-white">2. Client Responsibilities</h4>
+                <p>Clients agree to provide timely feedback and necessary assets (logos, branding guidelines) to ensure the project meets set deadlines.</p>
+
+                <h4 class="font-bold text-white">3. Intellectual Property</h4>
+                <p>Upon final payment, the client assumes full ownership rights of the final web product. Aether Design reserves the right to display the completed work in our portfolio, unless a strict NDA is signed.</p>
+
+                <h4 class="font-bold text-white">4. Satisfaction Guarantee</h4>
+                <p>We promise to work tirelessly until you are satisfied with the final design. Refunds are evaluated on a case-by-case basis before the launch phase, strictly adhering to the mutual agreement contract.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
     <script>
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const content = modal.querySelector('div');
-            
-            // Show modal container
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            
-            // Trigger reflow
-            void modal.offsetWidth;
-            
-            // Add visible classes for transition
-            modal.classList.remove('opacity-0');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
+        let selectedDate = null;
+        let selectedTime = null;
+        const MY_PHONE = "34640230147";
 
-            // Prevent body scroll
-            document.body.style.overflow = 'hidden';
-
-            // Si es el modal de reserva, inicializar fechas
-            if(modalId === 'bookingModal') {
-                initBookingCalendar();
-            }
+        function openBookingModal() {
+            openModal('modal-booking');
+            generateCalendar();
         }
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const content = modal.querySelector('div');
+        function generateCalendar() {
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
             
-            // Remove visible classes
-            modal.classList.add('opacity-0');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-
-            // Wait for transition to finish before hiding
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                // Restore body scroll
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-
-        // Close modals when clicking outside the content area
-        document.addEventListener('click', function(event) {
-            const modals = ['legalNoticeModal', 'privacyPolicyModal', 'termsModal', 'bookingModal'];
-            modals.forEach(modalId => {
-                const modal = document.getElementById(modalId);
-                if (!modal.classList.contains('hidden') && event.target === modal) {
-                    closeModal(modalId);
-                }
+            // US Weekdays (Starts on Sunday)
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            daysOfWeek.forEach(d => {
+                grid.innerHTML += `<div class="text-gray-600 font-bold mb-2">${d}</div>`;
             });
-        });
 
-        function initBookingCalendar() {
-            const dateGrid = document.getElementById('dateGrid');
-            dateGrid.innerHTML = ''; // Limpiar
-            
-            // Generar los próximos 4 días laborables
-            let count = 0;
-            let current = new Date();
-            
-            while(count < 4) {
-                current.setDate(current.getDate() + 1);
-                // Saltar fines de semana (0=Domingo, 6=Sábado)
-                if(current.getDay() !== 0 && current.getDay() !== 6) {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = 'date-btn py-3 px-2 border border-gray-700 rounded-lg flex flex-col items-center justify-center hover:border-[#00ff9d] hover:bg-emerald-950/20 transition-all';
-                    
-                    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    
-                    const dayName = days[current.getDay()];
-                    const dateNum = current.getDate();
-                    const monthName = months[current.getMonth()];
-                    const fullDateStr = `${dayName}, ${monthName} ${dateNum}`;
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
 
-                    btn.innerHTML = `
-                        <span class="text-xs text-gray-400 mb-1">${dayName}</span>
-                        <span class="text-xl font-bold text-white">${dateNum}</span>
-                        <span class="text-xs text-gray-500 mt-1">${monthName}</span>
-                    `;
-                    
-                    btn.dataset.fulldate = fullDateStr;
-                    
-                    btn.onclick = function() {
-                        // Resetear estilos de otros botones de fecha
-                        document.querySelectorAll('.date-btn').forEach(b => {
-                            b.classList.remove('border-[#00ff9d]', 'bg-emerald-950/30');
-                            b.classList.add('border-gray-700');
-                        });
-                        // Aplicar estilo al seleccionado
-                        this.classList.remove('border-gray-700');
-                        this.classList.add('border-[#00ff9d]', 'bg-emerald-950/30');
-                        
-                        document.getElementById('selectedDate').value = this.dataset.fulldate;
-                        
-                        // Mostrar selector de hora
-                        const timeSection = document.getElementById('timeSelector');
-                        timeSection.classList.remove('hidden');
-                        setTimeout(() => timeSection.classList.remove('opacity-0'), 10);
-                        
-                        // Resetear hora si se cambia de día
-                        document.getElementById('selectedTime').value = '';
-                        document.querySelectorAll('.time-btn').forEach(b => {
-                            b.classList.remove('bg-[#00ff9d]', 'text-black');
-                            b.classList.add('text-white');
-                        });
-                        document.getElementById('userDetails').classList.add('opacity-0', 'hidden');
-                    };
-                    
-                    dateGrid.appendChild(btn);
-                    count++;
+            // Pad the start of the calendar with empty divs based on tomorrow's weekday
+            const startDay = tomorrow.getDay();
+            for (let i = 0; i < startDay; i++) {
+                grid.innerHTML += `<div></div>`;
+            }
+
+            // Show next 21 days
+            for (let i = 1; i <= 21; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                
+                const isSunday = date.getDay() === 0;
+                const dayNum = date.getDate();
+                const month = date.toLocaleDateString('en-US', { month: 'short' });
+
+                if (isSunday) {
+                    grid.innerHTML += `<div class="p-3 text-gray-800 cursor-not-allowed">${dayNum}</div>`;
+                } else {
+                    const dateStr = date.toISOString().split('T')[0];
+                    grid.innerHTML += `
+                        <button 
+                            onclick="selectDay(this, '${dateStr}')"
+                            class="day-btn p-2 rounded-xl border border-gray-800 hover:border-emerald-500/50 transition-all flex flex-col items-center">
+                            <span class="text-gray-500 text-[10px] uppercase">${month}</span>
+                            <span class="text-lg font-bold text-white">${dayNum}</span>
+                        </button>`;
                 }
             }
         }
 
-        // Eventos para los botones de hora
-        document.querySelectorAll('.time-btn').forEach(btn => {
-            btn.onclick = function() {
-                // Resetear otros botones de hora
-                document.querySelectorAll('.time-btn').forEach(b => {
-                    b.classList.remove('bg-[#00ff9d]', 'text-black', 'border-[#00ff9d]');
-                    b.classList.add('border-gray-700', 'text-white');
-                });
-                // Seleccionar actual
-                this.classList.remove('border-gray-700', 'text-white');
-                this.classList.add('bg-[#00ff9d]', 'text-black', 'border-[#00ff9d]');
-                
-                document.getElementById('selectedTime').value = this.dataset.time;
-                
-                // Mostrar formulario de detalles
-                const userSection = document.getElementById('userDetails');
-                userSection.classList.remove('hidden');
-                setTimeout(() => userSection.classList.remove('opacity-0'), 10);
-            }
-        });
+        function selectDay(btn, date) {
+            document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('bg-emerald-500', 'text-black', 'border-emerald-500'));
+            document.querySelectorAll('.day-btn').forEach(b => {
+                b.querySelector('span:last-child').classList.add('text-white');
+                b.querySelector('span:first-child').classList.add('text-gray-500');
+            });
 
-        function handleBookingSubmit(event) {
-            event.preventDefault();
+            btn.classList.add('bg-emerald-500', 'border-emerald-500');
+            btn.querySelector('span:last-child').classList.replace('text-white', 'text-black');
+            btn.querySelector('span:first-child').classList.replace('text-gray-500', 'text-black');
             
-            const date = document.getElementById('selectedDate').value;
-            const time = document.getElementById('selectedTime').value;
-            const name = document.getElementById('userName').value;
-            const company = document.getElementById('userCompany').value;
-            const needs = document.getElementById('userNeeds').value;
-            
-            if(!date || !time) {
-                alert("Please select a date and time.");
-                return;
-            }
+            selectedDate = date;
+            generateTimeSlots();
+            checkSelection();
+        }
 
-            // Construir el mensaje de WhatsApp con el número proporcionado
-            const phone = "34640230147"; // Número establecido a 640230147 (+34 España)
-            const text = `Hi Hugo, I'd like to book a discovery call with you.%0A%0A` +
-                         `*Day:* ${date}%0A` +
-                         `*Time:* ${time} (CET/CEST)%0A%0A` +
-                         `*My details:*%0A` +
-                         `- Name: ${name}%0A` +
-                         `- Company/Project: ${company}%0A` +
-                         `- I need: ${needs}%0A%0A` +
-                         `Looking forward to your confirmation!`;
-                         
-            const whatsappUrl = `https://wa.me/${phone}?text=${text}`;
+        function generateTimeSlots() {
+            const grid = document.getElementById('time-grid');
+            grid.innerHTML = '';
+            // US Formatted times
+            const slots = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM"];
             
-            // Cerrar modal y redirigir a WhatsApp
-            closeModal('bookingModal');
-            window.open(whatsappUrl, '_blank');
+            slots.forEach(time => {
+                grid.innerHTML += `
+                    <button 
+                        onclick="selectTime(this, '${time}')"
+                        class="time-btn py-3 px-4 rounded-xl border border-gray-800 text-gray-400 font-bold hover:border-emerald-500/50 transition-all">
+                        ${time}
+                    </button>`;
+            });
+        }
+
+        function selectTime(btn, time) {
+            document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('bg-emerald-500', 'text-black', 'border-emerald-500'));
+            btn.classList.add('bg-emerald-500', 'text-black', 'border-emerald-500');
+            selectedTime = time;
+            checkSelection();
+        }
+
+        function checkSelection() {
+            const btn = document.getElementById('confirm-booking-btn');
+            if (selectedDate && selectedTime) {
+                btn.disabled = false;
+                btn.classList.add('animate-pulse');
+            }
+        }
+
+        function sendWhatsAppBooking() {
+            // Format for US english
+            const dateObj = new Date(selectedDate);
+            // Append a time so timezone conversion doesn't shift the day backwards
+            dateObj.setHours(12);
             
-            // Limpiar formulario para el futuro
-            document.getElementById('bookingForm').reset();
-            document.getElementById('selectedDate').value = '';
-            document.getElementById('selectedTime').value = '';
-            document.getElementById('timeSelector').classList.add('hidden', 'opacity-0');
-            document.getElementById('userDetails').classList.add('hidden', 'opacity-0');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateFormatted = dateObj.toLocaleDateString('en-US', options);
+            
+            // English message
+            const message = `Hi Hugo! 👋 I would like to book a strategy session with Aether Design.%0A%0A📅 *Date:* ${dateFormatted}%0A🕒 *Time:* ${selectedTime} (EST)%0A%0APlease let me know if this slot is available.`;
+            
+            window.open(`https://wa.me/${MY_PHONE}?text=${message}`, '_blank');
+            closeModal('modal-booking');
+        }
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            if(id === 'modal-booking') {
+                selectedDate = null;
+                selectedTime = null;
+                document.getElementById('confirm-booking-btn').disabled = true;
+                document.getElementById('confirm-booking-btn').classList.remove('animate-pulse');
+            }
         }
     </script>
-
 </body>
 </html>
