@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether - Tu web es invisible</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Librería para generar PDFs reales - Aseguramos carga correcta -->
+    <!-- Librería jsPDF cargada desde CDN estable -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
@@ -18,9 +18,7 @@
         
         .legal-content h1 { @apply text-3xl font-bold mb-8 text-white tracking-tight; }
         .legal-content h2 { @apply text-2xl font-bold mt-8 mb-4 text-emerald-600 border-b border-emerald-900/30 pb-2; }
-        .legal-content h3 { @apply text-lg font-semibold mt-6 mb-2 text-emerald-700; }
         .legal-content p { @apply mb-4 text-gray-400 text-sm leading-relaxed; }
-        .legal-content ul { @apply list-disc ml-6 mb-4 text-gray-400 text-sm; }
         
         .hidden-section { display: none; }
         
@@ -66,11 +64,11 @@
             
             <!-- Botón de Descarga -->
             <div class="flex flex-col items-center gap-6">
-                <button id="downloadBtn" onclick="generateRealPDF()" class="group relative inline-flex items-center justify-center px-12 py-5 bg-emerald-950 hover:bg-emerald-900 text-emerald-100 font-medium text-lg rounded-full transition-all duration-700 transform hover:scale-105 border border-emerald-900/30 shadow-[0_0_40px_rgba(6,78,59,0.15)]">
+                <button id="downloadBtn" class="group relative inline-flex items-center justify-center px-12 py-5 bg-emerald-950 hover:bg-emerald-900 text-emerald-100 font-medium text-lg rounded-full transition-all duration-700 transform hover:scale-105 border border-emerald-900/30 shadow-[0_0_40px_rgba(6,78,59,0.15)]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-emerald-600 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
-                    <span id="btnText">Descargar Guía PDF</span>
+                    <span id="btnText">Descargar Guía PDF Completa</span>
                 </button>
                 <span class="text-[10px] text-zinc-800 uppercase tracking-[0.4em] font-light">Aether Studio System</span>
             </div>
@@ -86,7 +84,7 @@
         <div class="legal-content bg-black p-8 md:p-12 rounded-3xl border border-zinc-900">
             <h1>Aviso Legal</h1>
             <p><strong>Titular:</strong> Hugo Pérez | <strong>NIF:</strong> 26055790X | <strong>Email:</strong> hugoperezmene@gmail.com</p>
-            <p>Hugo Pérez es titular de todos los derechos de propiedad intelectual e industrial de su página web y contenidos.</p>
+            <p>Hugo Pérez es titular de todos los derechos de propiedad intelectual e industrial de su página web y contenidos conforme a la legislación española.</p>
         </div>
     </section>
 
@@ -97,7 +95,7 @@
         </button>
         <div class="legal-content bg-black p-8 md:p-12 rounded-3xl border border-zinc-900">
             <h1>Privacidad</h1>
-            <p>No se recogen datos personales de forma automatizada. El uso de este sitio es meramente informativo.</p>
+            <p>De acuerdo con el RGPD, le informamos que este sitio web no recopila datos personales de forma automatizada ni utiliza formularios de contacto que almacenen información en bases de datos externas sin consentimiento previo.</p>
         </div>
     </section>
 
@@ -108,7 +106,7 @@
         </button>
         <div class="legal-content bg-black p-8 md:p-12 rounded-3xl border border-zinc-900">
             <h1>Cookies</h1>
-            <p>Utilizamos cookies técnicas esenciales para la navegación.</p>
+            <p>Utilizamos cookies técnicas de carácter esencial para permitir la navegación y seguridad del sitio. No se utilizan cookies de seguimiento publicitario de terceros.</p>
         </div>
     </section>
 
@@ -139,98 +137,103 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Función principal de generación de PDF
-        async function generateRealPDF() {
-            // Verificar si la librería se cargó correctamente (evita errores en GitHub)
-            if (!window.jspdf) {
-                console.error("La librería jsPDF no se ha cargado.");
-                const btnText = document.getElementById('btnText');
-                btnText.textContent = "Error de conexión";
-                setTimeout(() => { btnText.textContent = "Reintentar descarga"; }, 3000);
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            generateFullPDF();
+        });
+
+        async function generateFullPDF() {
+            const { jsPDF } = window.jspdf || window.window.jspdf;
+            if (!jsPDF) {
+                alert("Error de carga. Por favor, recarga la página.");
                 return;
             }
 
-            const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const btn = document.getElementById('downloadBtn');
             const btnText = document.getElementById('btnText');
             
-            btnText.textContent = "Generando...";
+            btnText.textContent = "Preparando Guía...";
             btn.disabled = true;
 
             const margin = 20;
             let cursorY = 25;
 
-            // Función auxiliar para añadir texto con control de página
-            const addText = (text, size = 12, style = 'normal', color = [0, 0, 0]) => {
+            const addText = (text, size = 11, style = 'normal', color = [40, 40, 40]) => {
                 doc.setFont('helvetica', style);
                 doc.setFontSize(size);
                 doc.setTextColor(color[0], color[1], color[2]);
                 const lines = doc.splitTextToSize(text, 170);
                 
-                // Comprobar si necesitamos nueva página
-                if (cursorY + (lines.length * (size * 0.5)) > 280) {
+                if (cursorY + (lines.length * 7) > 275) {
                     doc.addPage();
                     cursorY = 25;
                 }
-
                 doc.text(lines, margin, cursorY);
                 cursorY += (lines.length * (size * 0.5)) + 7;
             };
 
-            // CONTENIDO DEL PDF
-            addText("TU WEB NO ES MEDIOCRE. ES INVISIBLE.", 22, 'bold', [6, 78, 59]);
-            cursorY += 5;
-            addText("Si tu web existe hace más de 3 meses y sigues sin recibir mensajes espontáneos de gente que quiere trabajar contigo, no tienes un problema de diseño. Tienes un problema de mecánica.", 12);
-            addText("Y si subes contenido todos los días pero tu alcance sigue siendo tu círculo cercano + 200 personas aleatorias, tampoco es un problema de algoritmo.", 12);
-            addText("Es que nadie te encuentra cuando te está buscando.", 12, 'italic');
-            cursorY += 5;
-            addText("EL ERROR QUE TE CUESTA DINERO CADA DÍA", 14, 'bold');
-            addText("Hay tres señales de que tu problema no es 'crear más contenido':", 12);
-            addText("1. Tu web recibe visitas, pero nadie te escribe. No entienden qué haces en los primeros 5 segundos.", 11);
-            addText("2. Tu contenido tiene buena producción, pero tus seguidores no suben.", 11);
-            addText("3. Tu respuesta a '¿a qué te dedicas?' ocupa más de 8 palabras. Tu mensaje no se propaga solo.", 11);
+            const addTitle = (text, size = 16, color = [6, 78, 59]) => {
+                cursorY += 5;
+                addText(text, size, 'bold', color);
+                cursorY += 2;
+            };
 
-            cursorY += 10;
-            addText("POR QUÉ SIGUES INVISIBLE", 16, 'bold', [6, 78, 59]);
-            addText("La mayoría de emprendedores creen que el problema es producir más. Pero gritar más fuerte en una habitación vacía no sirve de nada.", 12);
-            addText("Capa 1: Tu web no convierte tráfico en interés. Titulares genéricos, lista de servicios sin contexto.", 11);
-            addText("Capa 2: Tu contenido no tiene mecanismo de descubrimiento.", 11);
-
-            cursorY += 10;
-            addText("QUÉ HACER DESDE MAÑANA", 16, 'bold', [6, 78, 59]);
-            addText("AJUSTE 1: Reescribe tu titular. Fórmula: 'Ayudo a [avatar] a [resultado] sin [objeción]'.", 12);
-            addText("AJUSTE 2: Reduce tu web a una sola acción. Solo titular, 3 bullets y un botón.", 12);
+            // --- CONTENIDO ÍNTEGRO DEL DOCUMENTO ---
             
+            addText("TU WEB NO ES MEDIOCRE. ES INVISIBLE.", 20, 'bold', [6, 78, 59]);
+            cursorY += 5;
+            
+            addText("Si tu web existe hace más de 3 meses y sigues sin recibir mensajes espontáneos de gente que quiere trabajar contigo, no tienes un problema de diseño. Tienes un problema de mecánica.", 11);
+            addText("Y si subes contenido todos los días pero tu alcance sigue siendo tu círculo cercano + 200 personas aleatorias, tampoco es un problema de algoritmo.", 11);
+            addText("Es que nadie te encuentra cuando te está buscando.", 11, 'italic');
+            
+            addTitle("EL ERROR QUE TE CUESTA DINERO CADA DÍA");
+            addText("Hay tres señales de que tu problema no es \"crear más contenido\":", 11);
+            addText("1. Tu web recibe visitas, pero nadie te escribe. Significa que quien llega NO entiende qué haces en los primeros 5 segundos. O entiende qué haces, pero no por qué debería importarle.", 10);
+            addText("2. Tu contenido tiene buena producción, pero tus seguidores se mueven 10-30 al mes. Estás cumpliendo el ritual de \"hacer contenido\", pero no resuelves el problema de descubrimiento.", 10);
+            addText("3. Tu respuesta a \"¿a qué te dedicas?\" ocupa más de 8 palabras. Si necesitas explicar lo que haces, tu mensaje no existe.", 10);
+
+            addTitle("POR QUÉ SIGUES INVISIBLE");
+            addText("Mecánica 1: Tu web no convierte. La mayoría de webs son folletos digitales estáticos que hablan del dueño, no del problema del cliente.", 11);
+            addText("Mecánica 2: Tu contenido es invisible para los nuevos. El contenido que gusta a tus seguidores rara vez es el contenido que te trae gente nueva.", 11);
+
+            addTitle("CÓMO ARREGLARLO: 4 AJUSTES");
+            addText("AJUSTE 1: El titular de impacto. Debe responder en 3 segundos: ¿Qué haces? ¿Para quién? ¿Qué gano yo?", 11);
+            addText("AJUSTE 2: Reduce tu web a una sola acción. Solo deja titular, 3 bullets con problemas que resuelves y un botón claro de agenda.", 11);
+            addText("AJUSTE 3: Optimiza tu perfil para búsqueda. Usa palabras clave que tu cliente buscaría (ej: Hugo Aether | Webs que venden).", 11);
+            addText("AJUSTE 4: Publica 1 pieza de contenido buscable por semana. Problema identificado + diagnóstico + solución parcial.", 11);
+
+            addTitle("LA VERDAD INCÓMODA", 14, [150, 0, 0]);
+            addText("Esto funciona si lo aplicas exactamente como está escrito. Si llevas meses estancado, no te falta constancia. Te falta mecánica.", 11);
+
             cursorY += 15;
-            addText("SIGUIENTE PASO", 14, 'bold', [6, 78, 59]);
-            addText("Agenda tu sesión de diagnóstico sin costo en:", 12);
-            addText("https://aetherstudio.es/", 12, 'bold', [0, 0, 255]);
+            addText("SIGUIENTE PASO", 13, 'bold', [6, 78, 59]);
+            addText("Aplica para una sesión de diagnóstico de 30 minutos sin costo. Te diré exactamente qué está roto y qué cambiamos primero.", 11);
+            addText("Agenda aquí: https://aetherstudio.es/", 12, 'bold', [0, 0, 255]);
 
-            // Descarga final
-            doc.save('Mecanica_Ventas_Aether.pdf');
-            
-            btnText.textContent = "¡Descargado!";
+            try {
+                doc.save('Guia_Aether_Mecanica_Ventas.pdf');
+                btnText.textContent = "¡Guía Descargada!";
+            } catch (err) {
+                btnText.textContent = "Error al generar";
+            }
+
             setTimeout(() => {
-                btnText.textContent = "Descargar Guía PDF";
+                btnText.textContent = "Descargar Guía PDF Completa";
                 btn.disabled = false;
-            }, 2000);
+            }, 3000);
         }
 
         function showSection(id) {
             document.getElementById('header-brand').classList.add('hidden-section');
             document.getElementById('main-content').classList.add('hidden-section');
-            document.getElementById('aviso-legal').classList.add('hidden-section');
-            document.getElementById('privacidad').classList.add('hidden-section');
-            document.getElementById('cookies').classList.add('hidden-section');
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden-section'));
             document.getElementById(id).classList.remove('hidden-section');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function showMain() {
-            document.getElementById('aviso-legal').classList.add('hidden-section');
-            document.getElementById('privacidad').classList.add('hidden-section');
-            document.getElementById('cookies').classList.add('hidden-section');
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden-section'));
             document.getElementById('header-brand').classList.remove('hidden-section');
             document.getElementById('main-content').classList.remove('hidden-section');
             window.scrollTo({ top: 0, behavior: 'smooth' });
