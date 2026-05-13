@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether - Tu web es invisible</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Librería para generar PDFs reales -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
         body { 
@@ -19,7 +21,6 @@
         .legal-content h3 { @apply text-lg font-semibold mt-6 mb-2 text-emerald-700; }
         .legal-content p { @apply mb-4 text-gray-400 text-sm leading-relaxed; }
         .legal-content ul { @apply list-disc ml-6 mb-4 text-gray-400 text-sm; }
-        .legal-content strong { @apply text-zinc-300 font-medium; }
         
         .hidden-section { display: none; }
         
@@ -63,14 +64,14 @@
                 Descubre por qué nadie te encuentra cuando te busca y cómo arreglar tu mecánica de ventas hoy mismo.
             </p>
             
-            <!-- Botón de Descarga Verde Oscuro -->
+            <!-- Botón de Descarga Generado Dinámicamente -->
             <div class="flex flex-col items-center gap-6">
-                <a href="documento_aetherstudio.pdf" download class="group relative inline-flex items-center justify-center px-12 py-5 bg-emerald-950 hover:bg-emerald-900 text-emerald-100 font-medium text-lg rounded-full transition-all duration-700 transform hover:scale-105 border border-emerald-900/30 shadow-[0_0_40px_rgba(6,78,59,0.15)]">
+                <button id="downloadBtn" onclick="generateRealPDF()" class="group relative inline-flex items-center justify-center px-12 py-5 bg-emerald-950 hover:bg-emerald-900 text-emerald-100 font-medium text-lg rounded-full transition-all duration-700 transform hover:scale-105 border border-emerald-900/30 shadow-[0_0_40px_rgba(6,78,59,0.15)]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-emerald-600 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
-                    Descargar Guía PDF
-                </a>
+                    <span id="btnText">Descargar Guía PDF</span>
+                </button>
                 <span class="text-[10px] text-zinc-800 uppercase tracking-[0.4em] font-light">Aether Studio System</span>
             </div>
         </div>
@@ -84,20 +85,8 @@
         </button>
         <div class="legal-content bg-black p-8 md:p-12 rounded-3xl border border-zinc-900">
             <h1>Aviso Legal</h1>
-            <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSICE), se exponen los siguientes datos identificativos:</p>
-            <h3>1. Datos del Titular</h3>
-            <p>
-                <strong>Titular:</strong> Hugo Pérez<br>
-                <strong>NIF/CIF:</strong> 26055790X<br>
-                <strong>Domicilio:</strong> Calle La Milagrosa, 30<br>
-                <strong>Email:</strong> hugoperezmene@gmail.com<br>
-                <strong>Sitio Web:</strong> aetherstudio.es
-            </p>
-            <h3>2. Condiciones de Uso</h3>
-            <p>El acceso y uso de este sitio web atribuye la condición de usuario, que acepta, desde dicho acceso, las condiciones generales aquí reflejadas. El usuario asume la responsabilidad del uso del portal.</p>
-            <h3>3. Propiedad Intelectual</h3>
-            <p>Hugo Pérez es titular de todos los derechos de propiedad intelectual e industrial de su página web, así como de los elementos contenidos en la misma (a título enunciativo: imágenes, sonido, audio, vídeo, software o textos; marcas o logotipos, combinaciones de colores, estructura y diseño, selección de materiales usados, programas de ordenador necesarios para su funcionamiento, acceso y uso, etc.).</p>
-            <p>Queda expresamente prohibida la reproducción, la distribución y la comunicación pública, incluida su modalidad de puesta a disposición, de la totalidad o parte de los contenidos de esta página web, con fines comerciales, en cualquier soporte y por cualquier medio técnico, sin la autorización de Hugo Pérez.</p>
+            <p><strong>Titular:</strong> Hugo Pérez | <strong>NIF:</strong> 26055790X | <strong>Email:</strong> hugoperezmene@gmail.com</p>
+            <p>Hugo Pérez es titular de todos los derechos de propiedad intelectual e industrial de su página web y contenidos. Queda prohibida la reproducción sin autorización expresa.</p>
         </div>
     </section>
 
@@ -107,20 +96,8 @@
             Volver
         </button>
         <div class="legal-content bg-black p-8 md:p-12 rounded-3xl border border-zinc-900">
-            <h1>Política de Privacidad</h1>
-            <p>De conformidad con lo dispuesto en el Reglamento (UE) 2016/679 relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), informamos:</p>
-            <h3>1. Responsable del Tratamiento</h3>
-            <p>
-                <strong>Nombre:</strong> Hugo Pérez<br>
-                <strong>NIF:</strong> 26055790X<br>
-                <strong>Email:</strong> hugoperezmene@gmail.com
-            </p>
-            <h3>2. Finalidad del Tratamiento</h3>
-            <p>La finalidad de este sitio web es exclusivamente informativa y facilitar la descarga del documento PDF solicitado por el usuario. No se recogen datos personales de forma automatizada mediante formularios de contacto en esta página.</p>
-            <h3>3. Conservación de los datos</h3>
-            <p>Dado que no se solicitan datos de registro, no se conservan datos personales en ninguna base de datos activa de este sitio web.</p>
-            <h3>4. Derechos</h3>
-            <p>Usted tiene derecho a acceder, rectificar, limitar el tratamiento, suprimir y solicitar la portabilidad de sus datos personales enviando un correo electrónico a hugoperezmene@gmail.com.</p>
+            <h1>Privacidad</h1>
+            <p>No se recogen datos personales de forma automatizada. El uso de este sitio es meramente informativo.</p>
         </div>
     </section>
 
@@ -130,17 +107,8 @@
             Volver
         </button>
         <div class="legal-content bg-black p-8 md:p-12 rounded-3xl border border-zinc-900">
-            <h1>Política de Cookies</h1>
-            <p>Este sitio web utiliza cookies para mejorar la experiencia de navegación del usuario.</p>
-            <h3>1. ¿Qué son las cookies?</h3>
-            <p>Las cookies son pequeños archivos de texto que el sitio web envía al navegador y que se almacenan en el terminal del usuario para recordar información sobre su visita.</p>
-            <h3>2. Tipos de Cookies utilizadas</h3>
-            <ul>
-                <li><strong>Cookies Técnicas:</strong> Son aquellas esenciales para que la web funcione y el usuario pueda navegar sin problemas.</li>
-                <li><strong>Cookies de Personalización:</strong> Permiten recordar preferencias como el idioma o el estilo visual.</li>
-            </ul>
-            <h3>3. Cómo gestionar las cookies</h3>
-            <p>Usted puede permitir, bloquear o eliminar las cookies instaladas en su equipo mediante la configuración de las opciones del navegador instalado en su ordenador.</p>
+            <h1>Cookies</h1>
+            <p>Utilizamos cookies técnicas esenciales para la navegación.</p>
         </div>
     </section>
 
@@ -158,10 +126,10 @@
         </div>
     </footer>
 
-    <!-- Banner de Cookies (Capa 1) -->
+    <!-- Banner de Cookies -->
     <div id="cookie-banner" class="fixed bottom-8 right-8 left-8 md:left-auto md:w-80 bg-zinc-950 border border-emerald-900/20 p-6 rounded-xl shadow-2xl z-50">
         <p class="text-[10px] text-zinc-600 mb-5 leading-relaxed tracking-wider">
-            Utilizamos cookies esenciales para el funcionamiento de la red Aether. <button onclick="showSection('cookies')" class="text-emerald-900 underline">Más información</button>.
+            Utilizamos cookies técnicas. <button onclick="showSection('cookies')" class="text-emerald-900 underline">Más info</button>.
         </p>
         <div class="flex justify-end">
             <button onclick="closeCookies()" class="px-6 py-2 bg-emerald-950 text-emerald-100 text-[9px] uppercase tracking-widest font-bold rounded hover:bg-emerald-900 transition-colors">Aceptar</button>
@@ -169,17 +137,93 @@
     </div>
 
     <script>
-        // Actualización de año
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Navegación SPA
+        async function generateRealPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const btn = document.getElementById('downloadBtn');
+            const btnText = document.getElementById('btnText');
+            
+            btnText.textContent = "Generando...";
+            btn.disabled = true;
+
+            // --- ESTILOS Y CONTENIDO ---
+            const margin = 20;
+            let cursorY = 25;
+
+            const addText = (text, size = 12, style = 'normal', color = [0, 0, 0]) => {
+                doc.setFont('helvetica', style);
+                doc.setFontSize(size);
+                doc.setTextColor(color[0], color[1], color[2]);
+                const lines = doc.splitTextToSize(text, 170);
+                doc.text(lines, margin, cursorY);
+                cursorY += (lines.length * (size * 0.5)) + 7;
+            };
+
+            const addPage = () => {
+                doc.addPage();
+                cursorY = 25;
+            };
+
+            // PAGINA 1
+            addText("TU WEB NO ES MEDIOCRE. ES INVISIBLE.", 22, 'bold', [6, 78, 59]);
+            cursorY += 5;
+            addText("Si tu web existe hace más de 3 meses y sigues sin recibir mensajes espontáneos de gente que quiere trabajar contigo, no tienes un problema de diseño. Tienes un problema de mecánica.", 12);
+            addText("Y si subes contenido todos los días pero tu alcance sigue siendo tu círculo cercano + 200 personas aleatorias, tampoco es un problema de algoritmo.", 12);
+            addText("Es que nadie te encuentra cuando te está buscando.", 12, 'italic');
+            cursorY += 5;
+            addText("EL ERROR QUE TE CUESTA DINERO CADA DÍA", 14, 'bold');
+            addText("Hay tres señales de que tu problema no es 'crear más contenido':", 12);
+            addText("1. Tu web recibe visitas, pero nadie te escribe. No entienden qué haces en los primeros 5 segundos.", 11);
+            addText("2. Tu contenido tiene buena producción, pero tus seguidores no suben. No estás resolviendo el problema en frío.", 11);
+            addText("3. Tu respuesta a '¿a qué te dedicas?' ocupa más de 8 palabras. Tu mensaje no se propaga solo.", 11);
+
+            addPage();
+
+            // PAGINA 2
+            addText("POR QUÉ SIGUES INVISIBLE", 16, 'bold', [6, 78, 59]);
+            addText("La mayoría de emprendedores creen que el problema es producir más. Más reels, más posts. Pero gritar más fuerte en una habitación vacía no sirve de nada.", 12);
+            cursorY += 5;
+            addText("CAPA 1: Tu web no convierte tráfico en interés.", 13, 'bold');
+            addText("• Titulares genéricos.", 11);
+            addText("• Lista de servicios sin contexto.", 11);
+            addText("• Cero urgencia.", 11);
+            cursorY += 5;
+            addText("CAPA 2: Tu contenido no tiene mecanismo de descubrimiento.", 13, 'bold');
+            addText("Subir contenido sin SEO en el caption o sin palabras clave en la bio genera validación de tu círculo actual, pero nada más.", 12);
+
+            addPage();
+
+            // PAGINA 3
+            addText("QUÉ HACER DESDE MAÑANA", 16, 'bold', [6, 78, 59]);
+            addText("AJUSTE 1: Reescribe tu titular.", 12, 'bold');
+            addText("Fórmula: 'Ayudo a [avatar específico] a [resultado medible] sin [objeción principal]'.", 11, 'italic');
+            cursorY += 5;
+            addText("AJUSTE 2: Reduce tu web a una sola acción.", 12, 'bold');
+            addText("Elimina distracciones. Solo titular, 3 bullets y un botón de contacto directo.", 11);
+            cursorY += 5;
+            addText("SIGUIENTE PASO", 14, 'bold', [6, 78, 59]);
+            addText("Si esto te describe, necesitas implementar lo que acabas de leer. No necesitas más contenido, necesitas mecánica.", 12);
+            addText("Agenda tu sesión de diagnóstico sin costo en:", 12);
+            addText("https://aetherstudio.es/", 12, 'bold', [0, 0, 255]);
+
+            // Descarga
+            doc.save('Mecanica_Ventas_Aether.pdf');
+            
+            btnText.textContent = "¡Descargado!";
+            setTimeout(() => {
+                btnText.textContent = "Descargar Guía PDF";
+                btn.disabled = false;
+            }, 2000);
+        }
+
         function showSection(id) {
             document.getElementById('header-brand').classList.add('hidden-section');
             document.getElementById('main-content').classList.add('hidden-section');
             document.getElementById('aviso-legal').classList.add('hidden-section');
             document.getElementById('privacidad').classList.add('hidden-section');
             document.getElementById('cookies').classList.add('hidden-section');
-            
             document.getElementById(id).classList.remove('hidden-section');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -188,7 +232,6 @@
             document.getElementById('aviso-legal').classList.add('hidden-section');
             document.getElementById('privacidad').classList.add('hidden-section');
             document.getElementById('cookies').classList.add('hidden-section');
-            
             document.getElementById('header-brand').classList.remove('hidden-section');
             document.getElementById('main-content').classList.remove('hidden-section');
             window.scrollTo({ top: 0, behavior: 'smooth' });
