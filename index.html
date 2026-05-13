@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether - Tu web es invisible</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Librería para generar PDFs reales -->
+    <!-- Librería para generar PDFs reales - Aseguramos carga correcta -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
@@ -64,7 +64,7 @@
                 Descubre por qué nadie te encuentra cuando te busca y cómo arreglar tu mecánica de ventas hoy mismo.
             </p>
             
-            <!-- Botón de Descarga Generado Dinámicamente -->
+            <!-- Botón de Descarga -->
             <div class="flex flex-col items-center gap-6">
                 <button id="downloadBtn" onclick="generateRealPDF()" class="group relative inline-flex items-center justify-center px-12 py-5 bg-emerald-950 hover:bg-emerald-900 text-emerald-100 font-medium text-lg rounded-full transition-all duration-700 transform hover:scale-105 border border-emerald-900/30 shadow-[0_0_40px_rgba(6,78,59,0.15)]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-emerald-600 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,7 +86,7 @@
         <div class="legal-content bg-black p-8 md:p-12 rounded-3xl border border-zinc-900">
             <h1>Aviso Legal</h1>
             <p><strong>Titular:</strong> Hugo Pérez | <strong>NIF:</strong> 26055790X | <strong>Email:</strong> hugoperezmene@gmail.com</p>
-            <p>Hugo Pérez es titular de todos los derechos de propiedad intelectual e industrial de su página web y contenidos. Queda prohibida la reproducción sin autorización expresa.</p>
+            <p>Hugo Pérez es titular de todos los derechos de propiedad intelectual e industrial de su página web y contenidos.</p>
         </div>
     </section>
 
@@ -139,7 +139,17 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
+        // Función principal de generación de PDF
         async function generateRealPDF() {
+            // Verificar si la librería se cargó correctamente (evita errores en GitHub)
+            if (!window.jspdf) {
+                console.error("La librería jsPDF no se ha cargado.");
+                const btnText = document.getElementById('btnText');
+                btnText.textContent = "Error de conexión";
+                setTimeout(() => { btnText.textContent = "Reintentar descarga"; }, 3000);
+                return;
+            }
+
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const btn = document.getElementById('downloadBtn');
@@ -148,25 +158,27 @@
             btnText.textContent = "Generando...";
             btn.disabled = true;
 
-            // --- ESTILOS Y CONTENIDO ---
             const margin = 20;
             let cursorY = 25;
 
+            // Función auxiliar para añadir texto con control de página
             const addText = (text, size = 12, style = 'normal', color = [0, 0, 0]) => {
                 doc.setFont('helvetica', style);
                 doc.setFontSize(size);
                 doc.setTextColor(color[0], color[1], color[2]);
                 const lines = doc.splitTextToSize(text, 170);
+                
+                // Comprobar si necesitamos nueva página
+                if (cursorY + (lines.length * (size * 0.5)) > 280) {
+                    doc.addPage();
+                    cursorY = 25;
+                }
+
                 doc.text(lines, margin, cursorY);
                 cursorY += (lines.length * (size * 0.5)) + 7;
             };
 
-            const addPage = () => {
-                doc.addPage();
-                cursorY = 25;
-            };
-
-            // PAGINA 1
+            // CONTENIDO DEL PDF
             addText("TU WEB NO ES MEDIOCRE. ES INVISIBLE.", 22, 'bold', [6, 78, 59]);
             cursorY += 5;
             addText("Si tu web existe hace más de 3 meses y sigues sin recibir mensajes espontáneos de gente que quiere trabajar contigo, no tienes un problema de diseño. Tienes un problema de mecánica.", 12);
@@ -176,39 +188,26 @@
             addText("EL ERROR QUE TE CUESTA DINERO CADA DÍA", 14, 'bold');
             addText("Hay tres señales de que tu problema no es 'crear más contenido':", 12);
             addText("1. Tu web recibe visitas, pero nadie te escribe. No entienden qué haces en los primeros 5 segundos.", 11);
-            addText("2. Tu contenido tiene buena producción, pero tus seguidores no suben. No estás resolviendo el problema en frío.", 11);
+            addText("2. Tu contenido tiene buena producción, pero tus seguidores no suben.", 11);
             addText("3. Tu respuesta a '¿a qué te dedicas?' ocupa más de 8 palabras. Tu mensaje no se propaga solo.", 11);
 
-            addPage();
-
-            // PAGINA 2
+            cursorY += 10;
             addText("POR QUÉ SIGUES INVISIBLE", 16, 'bold', [6, 78, 59]);
-            addText("La mayoría de emprendedores creen que el problema es producir más. Más reels, más posts. Pero gritar más fuerte en una habitación vacía no sirve de nada.", 12);
-            cursorY += 5;
-            addText("CAPA 1: Tu web no convierte tráfico en interés.", 13, 'bold');
-            addText("• Titulares genéricos.", 11);
-            addText("• Lista de servicios sin contexto.", 11);
-            addText("• Cero urgencia.", 11);
-            cursorY += 5;
-            addText("CAPA 2: Tu contenido no tiene mecanismo de descubrimiento.", 13, 'bold');
-            addText("Subir contenido sin SEO en el caption o sin palabras clave en la bio genera validación de tu círculo actual, pero nada más.", 12);
+            addText("La mayoría de emprendedores creen que el problema es producir más. Pero gritar más fuerte en una habitación vacía no sirve de nada.", 12);
+            addText("Capa 1: Tu web no convierte tráfico en interés. Titulares genéricos, lista de servicios sin contexto.", 11);
+            addText("Capa 2: Tu contenido no tiene mecanismo de descubrimiento.", 11);
 
-            addPage();
-
-            // PAGINA 3
+            cursorY += 10;
             addText("QUÉ HACER DESDE MAÑANA", 16, 'bold', [6, 78, 59]);
-            addText("AJUSTE 1: Reescribe tu titular.", 12, 'bold');
-            addText("Fórmula: 'Ayudo a [avatar específico] a [resultado medible] sin [objeción principal]'.", 11, 'italic');
-            cursorY += 5;
-            addText("AJUSTE 2: Reduce tu web a una sola acción.", 12, 'bold');
-            addText("Elimina distracciones. Solo titular, 3 bullets y un botón de contacto directo.", 11);
-            cursorY += 5;
+            addText("AJUSTE 1: Reescribe tu titular. Fórmula: 'Ayudo a [avatar] a [resultado] sin [objeción]'.", 12);
+            addText("AJUSTE 2: Reduce tu web a una sola acción. Solo titular, 3 bullets y un botón.", 12);
+            
+            cursorY += 15;
             addText("SIGUIENTE PASO", 14, 'bold', [6, 78, 59]);
-            addText("Si esto te describe, necesitas implementar lo que acabas de leer. No necesitas más contenido, necesitas mecánica.", 12);
             addText("Agenda tu sesión de diagnóstico sin costo en:", 12);
             addText("https://aetherstudio.es/", 12, 'bold', [0, 0, 255]);
 
-            // Descarga
+            // Descarga final
             doc.save('Mecanica_Ventas_Aether.pdf');
             
             btnText.textContent = "¡Descargado!";
