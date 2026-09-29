@@ -1,0 +1,5 @@
+requests>=2.31
+PyYAML>=6.0
+openpyxl>=3.1
+# Solo para el modo --mode browser:
+# playwright>=1.45   (luego: python -m playwright install chromium)

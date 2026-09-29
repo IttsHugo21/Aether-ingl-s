@@ -1,0 +1,53 @@
+# Anunciantes que NO son lead: grandes marcas con agencia/productora propia,
+# marketplaces y grandes superficies. Se compara con el nombre de la página
+# y con el dominio (sin distinguir mayúsculas). Una entrada por línea.
+amazon
+aliexpress
+temu
+shein
+zalando
+el corte ingles
+elcorteingles
+zara
+inditex
+pull&bear
+bershka
+stradivarius
+massimo dutti
+oysho
+mango
+h&m
+primark
+decathlon
+ikea
+leroy merlin
+carrefour
+mercadona
+lidl
+aldi
+alcampo
+druni
+sephora
+primor
+douglas
+mediamarkt
+media markt
+pccomponentes
+fnac
+apple
+samsung
+xiaomi
+nike
+adidas
+pandora
+tous
+l'oréal
+loreal
+nestlé
+nestle
+wallapop
+vinted
+miravia
+glovo
+just eat
+uber eats

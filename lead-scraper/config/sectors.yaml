@@ -1,0 +1,52 @@
+# Sectores del ICP de Aether y las palabras clave que se buscan en la
+# Biblioteca de Anuncios de Meta. Añade o quita términos libremente.
+# La clave (joyeria, cosmetica...) es la que se pasa con --sectors.
+
+joyeria:
+  label: "💎 Joyería"
+  keywords: [joyería, joyas, joyería online, joyas online, anillos, pendientes, collares, pulseras, joyas personalizadas, joyería artesanal, joyería de autor, diamantes, oro, plata]
+
+cosmetica:
+  label: "💄 Cosmética / belleza"
+  keywords: [cosmética, skincare, cuidado facial, cuidado de la piel, sérum, crema facial, maquillaje, labiales, máscara de pestañas, cosmética natural, cosmética premium, belleza, haircare, cuidado capilar]
+
+moda:
+  label: "👗 Moda"
+  keywords: [ropa, moda, moda mujer, moda hombre, vestidos, camisetas, sudaderas, pantalones, ropa deportiva, moda online, boutique, fashion]
+
+calzado:
+  label: "👟 Calzado"
+  keywords: [zapatos, zapatillas, sneakers, botas, sandalias, calzado, calzado online]
+
+accesorios:
+  label: "👜 Accesorios"
+  keywords: [bolsos, carteras, mochilas, gafas, gafas de sol, cinturones, accesorios, complementos]
+
+hogar:
+  label: "🏠 Hogar / decoración"
+  keywords: [decoración, muebles, mobiliario, decoración hogar, lámparas, iluminación, sofás, decoración interior, hogar, interiorismo, velas, cuadros]
+
+deporte:
+  label: "🏋️ Deporte"
+  keywords: [ropa deportiva, material deportivo, accesorios fitness, gimnasio, fitness, running, ciclismo, yoga, suplementos, equipamiento deportivo]
+
+mascotas:
+  label: "🐶 Mascotas"
+  keywords: [productos para mascotas, accesorios mascotas, perros, gatos, comida para perros, comida para gatos, camas para perros, juguetes para mascotas]
+
+alimentacion:
+  label: "🍫 Alimentación premium"
+  keywords: [café, café online, chocolate, chocolates, té, alimentación gourmet, productos gourmet, aceite de oliva, vino, snacks, alimentación saludable]
+
+electronica:
+  label: "📱 Electrónica / tecnología de consumo"
+  keywords: [accesorios móvil, fundas móvil, auriculares, altavoces, smartwatch, tecnología, gadgets, electrónica, accesorios tecnológicos]
+
+# Extra: sectores que aparecen en aetherstudio.es y no estaban en la lista.
+perfumeria:
+  label: "🌸 Perfumería (extra)"
+  keywords: [perfume, perfumes, perfumería, fragancias, perfume nicho]
+
+relojeria:
+  label: "⌚ Relojería (extra)"
+  keywords: [relojes, reloj, relojería, relojes hombre, relojes mujer]
