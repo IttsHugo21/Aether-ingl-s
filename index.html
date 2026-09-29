@@ -254,7 +254,8 @@
   .ad-previews--3 .ad-slot:nth-child(3){grid-column:1 / -1}
   .ad-previews--stack{grid-template-columns:1fr}
   .ad-slot{position:relative;width:100%}
-  .ad-gif{width:100%;height:auto;display:block;border-radius:6px;background:#0d0d0d}
+  .ad-gif{width:100%;height:auto;display:block;border-radius:6px;background:#1a1a1a;aspect-ratio:16/9;object-fit:cover}
+  .ad-previews--3 .ad-slot:nth-child(-n+2) .ad-gif{aspect-ratio:9/16}
   .ad-canvas{position:absolute;inset:0;width:100%;height:100%;display:none;border-radius:6px}
   .ad-slot.is-ready .ad-canvas{display:block}
   .ad-slot.is-ready .ad-gif{visibility:hidden}
@@ -1291,7 +1292,7 @@ class Component extends DCLogic {
               if(!userPaused && v.paused){ const p = v.play(); if(p && p.catch) p.catch(()=>{}); }
             } else if(!v.paused) v.pause();
           });
-        }, { threshold: 0.25 }).observe(slot);
+        }, { threshold: 0.01 }).observe(slot);
       } catch(e){
         const p = v.play(); if(p && p.catch) p.catch(()=>{});
       }
