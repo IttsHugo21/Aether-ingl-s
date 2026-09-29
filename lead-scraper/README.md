@@ -119,6 +119,38 @@ tiene píxel de Meta/TikTok. Es best-effort: si una web falla o no responde, el
 lead se queda sin esos datos pero no rompe el proceso. Desactívalo con
 `--no-enrich` si solo quieres velocidad.
 
+## Integración con el CRM ("CRM {Meta Ads}")
+
+Cada ejecución también genera `output/crm_<fecha>.json`, con los leads ya en
+el **esquema exacto** que espera el CRM (`marca`, `sector`, `pais`, `web`,
+`anuncio_url`, `num_anuncios`, `tanda`, `estado`, `notas`, `fecha_tanda`), listo
+para su colección `leads`.
+
+Controla qué entra en ese archivo con:
+
+```bash
+python main.py --all-sectors --crm-min-tier B --crm-tanda 3
+```
+
+- `--crm-min-tier {A,B,C}`: solo incluye leads de ese tier o mejor (por
+  defecto `C` = todos los no excluidos).
+- `--crm-tanda N`: número de tanda a asignar a este lote.
+- `--crm-json ruta.json`: cambia dónde se escribe el archivo.
+
+**Importante:** este script *genera* el JSON, pero no lo escribe él mismo en
+el CRM. La base de datos de ese artifact vive en la organización de claude.ai
+de quien lo creó, y una sesión de Claude Code invitada como colaboradora no
+tiene permiso para leer/escribir su base de datos (lo intentamos: el intento
+de acceso devuelve "no access" explícitamente). Para meter los leads dentro:
+
+1. Abre el CRM en **claude.ai** (no en Claude Code) desde la cuenta dueña del
+   artifact, y pide ahí que importe el contenido de `crm_<fecha>.json` a la
+   colección `leads` — esa sesión sí puede escribir en su propia base de
+   datos.
+2. O, para unos pocos leads, cópialos a mano con el botón **"+ Añadir lead"**
+   del propio CRM — los campos del formulario coinciden uno a uno con las
+   claves del JSON.
+
 ## Tests
 
 ```bash

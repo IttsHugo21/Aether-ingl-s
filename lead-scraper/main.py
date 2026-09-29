@@ -23,6 +23,7 @@ from datetime import datetime
 from pathlib import Path
 
 from leads.aggregate import aggregate
+from leads.crm_export import export_for_crm
 from leads.enrich import enrich_all
 from leads.export import to_csv, to_xlsx
 from leads.score import score_all
@@ -48,6 +49,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--no-enrich", action="store_true", help="No visitar la web de cada lead.")
     p.add_argument("--no-headless", action="store_true", help="(modo browser) muestra la ventana de Chromium.")
     p.add_argument("--out", default=None, help="Ruta del Excel de salida (por defecto output/leads_<fecha>.xlsx).")
+    p.add_argument("--crm-json", default=None,
+                   help="Además, escribe un JSON con el esquema exacto del CRM 'CRM {Meta Ads}' "
+                        "(colección `leads`), listo para importar. Por defecto: output/crm_<fecha>.json")
+    p.add_argument("--crm-tanda", type=int, default=1, help="Número de tanda a asignar en el CRM (por defecto 1).")
+    p.add_argument("--crm-min-tier", choices=["A", "B", "C"], default="C",
+                   help="Tier mínimo a incluir en el export del CRM (por defecto C = todos).")
     p.add_argument("-v", "--verbose", action="store_true")
     return p.parse_args()
 
@@ -96,6 +103,10 @@ def main() -> None:
     n = to_xlsx(leads, out_path)
     to_csv(leads, out_path.with_suffix(".csv"))
     log.info("Listo: %d leads exportados a %s", n, out_path)
+
+    crm_path = Path(args.crm_json) if args.crm_json else OUTPUT_DIR / f"crm_{datetime.now():%Y%m%d_%H%M}.json"
+    n_crm = export_for_crm(leads, crm_path, tanda=args.crm_tanda, min_tier=args.crm_min_tier)
+    log.info("Export para el CRM: %d leads en %s (importa este JSON en la colección `leads`)", n_crm, crm_path)
 
     tiers = {"A": 0, "B": 0, "C": 0}
     for lead in leads.values():
