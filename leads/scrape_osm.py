@@ -3,8 +3,13 @@
 
 Uso: python3 leads/scrape_osm.py [--country ES] [--out leads/raw_osm.json]
 Solo se guardan negocios con web propia (señal mínima de presupuesto/marketing).
+
+Resiliente: guarda el resultado de cada sector en leads/cache/<sector>.json
+según se va obteniendo, así que un timeout o corte a media ejecución no
+pierde el trabajo ya hecho. Al relanzar, los sectores ya cacheados se
+saltan (usa --force para repetirlos todos).
 """
-import argparse, json, sys, time, urllib.parse, urllib.request
+import argparse, json, os, re, sys, time, urllib.parse, urllib.request
 
 ENDPOINTS = [
     "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
@@ -26,28 +31,35 @@ SECTORS = {
     "Electrónica": ["electronics", "mobile_phone", "hifi", "computer"],
 }
 
+CACHE_DIR = "leads/cache"
 
-def overpass(query):
+
+def slug(s):
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def overpass(query, attempts=5):
     body = urllib.parse.urlencode({"data": query}).encode()
     last = None
-    for attempt in range(4):
+    for attempt in range(attempts):
         for url in ENDPOINTS:
             try:
                 req = urllib.request.Request(url, data=body, headers={"User-Agent": "aether-leads/1.0"})
-                with urllib.request.urlopen(req, timeout=300) as r:
+                with urllib.request.urlopen(req, timeout=180) as r:
                     return json.load(r)["elements"]
-            except Exception as e:  # endpoint caído o saturado: probar el siguiente
+            except Exception as e:  # endpoint caído, saturado o timeout: probar el siguiente
                 last = e
-        time.sleep(2 ** (attempt + 1))
-    raise RuntimeError(f"Overpass falló: {last}")
+                print(f"    endpoint fallo ({url}): {e}", file=sys.stderr, flush=True)
+        time.sleep(min(2 ** (attempt + 1), 30))
+    raise RuntimeError(f"Overpass falló tras {attempts} intentos: {last}")
 
 
-def fetch_sector(country, shops):
+def fetch_sector(country, shops, timeout_s=120):
     rx = "^(" + "|".join(shops) + ")$"
-    q = f"""[out:json][timeout:280];
+    q = f"""[out:json][timeout:{timeout_s}];
 area["ISO3166-1"="{country}"][admin_level=2]->.a;
 (nwr["shop"~"{rx}"]["website"](area.a);
- nwr["shop"~"{rx}"]["contact:website"](area.a););
+ nwr["shop"~"{rx}"]["contact:website"](area.a));
 out center tags;"""
     return overpass(q)
 
@@ -79,16 +91,46 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--country", default="ES")
     ap.add_argument("--out", default="leads/raw_osm.json")
+    ap.add_argument("--force", action="store_true", help="reintenta también los sectores ya cacheados")
     a = ap.parse_args()
-    leads = []
+
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    failed = []
+
     for sector, shops in SECTORS.items():
-        els = fetch_sector(a.country, shops)
+        cache_path = os.path.join(CACHE_DIR, slug(sector) + ".json")
+        if os.path.exists(cache_path) and not a.force:
+            with open(cache_path) as f:
+                n = len(json.load(f))
+            print(f"{sector}: {n} (cache)", file=sys.stderr, flush=True)
+            continue
+        try:
+            els = fetch_sector(a.country, shops)
+        except Exception as e:
+            print(f"{sector}: FALLÓ ({e}) — se reintentará en la próxima ejecución", file=sys.stderr, flush=True)
+            failed.append(sector)
+            continue
+        leads = [to_lead(e, sector) for e in els]
+        with open(cache_path, "w") as f:
+            json.dump(leads, f, ensure_ascii=False, indent=1)
         print(f"{sector}: {len(els)}", file=sys.stderr, flush=True)
-        leads += [to_lead(e, sector) for e in els]
         time.sleep(3)
+
+    # Combina todo lo que haya en cache (de esta ejecución y de anteriores)
+    all_leads = []
+    for sector in SECTORS:
+        cache_path = os.path.join(CACHE_DIR, slug(sector) + ".json")
+        if os.path.exists(cache_path):
+            with open(cache_path) as f:
+                all_leads += json.load(f)
+
     with open(a.out, "w") as f:
-        json.dump(leads, f, ensure_ascii=False, indent=1)
-    print(f"Total: {len(leads)} -> {a.out}", file=sys.stderr)
+        json.dump(all_leads, f, ensure_ascii=False, indent=1)
+    print(f"Total: {len(all_leads)} -> {a.out}", file=sys.stderr)
+
+    if failed:
+        print(f"Sectores pendientes (relanza el script para reintentarlos): {', '.join(failed)}", file=sys.stderr)
+        sys.exit(2)
 
 
 if __name__ == "__main__":
