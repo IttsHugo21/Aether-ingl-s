@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether | Agencia de Automatización con IA para Empresas</title>
+    <meta name="description" content="Aether es una agencia de Inteligencia Artificial B2B. Solucionamos tu cuello de botella automatizando procesos para ahorrar tiempo y aumentar tu facturación.">
+    <meta name="keywords" content="automatización con Inteligencia Artificial, agencia de IA, optimización de procesos, IA para empresas, software a medida">
+    
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aetherstudio.es/">
+    <meta property="og:title" content="Aether | Agencia de Automatización con IA para Empresas">
+    <meta property="og:description" content="Automatizamos tus procesos con Inteligencia Artificial para ahorrar decenas de horas a la semana e incrementar tu facturación.">
+    <meta property="og:image" content="https://aetherstudio.es/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aetherstudio.es/">
+    <meta property="twitter:title" content="Aether | Agencia de Automatización con IA">
+    <meta property="twitter:description" content="Automatizamos tus procesos con Inteligencia Artificial para ahorrar decenas de horas a la semana e incrementar tu facturación.">
+    <meta property="twitter:image" content="https://aetherstudio.es/og-image.jpg">
+
+    <!-- Schema.org Markup (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Aether Studio",
+      "url": "https://aetherstudio.es",
+      "description": "Agencia de Inteligencia Artificial especializada en la automatización de procesos y desarrollo de software a medida para empresas.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ES"
+      },
+      "offers": {
+        "@type": "Offer",
+        "category": "Servicios de Inteligencia Artificial y Automatización B2B"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-primary: #ededed;
+            --text-secondary: #888888;
+            --border-color: #222222;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Syne', sans-serif;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            display: flex;
+            width: 200%;
+            animation: marquee 20s linear infinite;
+        }
+        
+        .marquee-container:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* FAQ Animation */
+        .faq-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .faq-content.open {
+            grid-template-rows: 1fr;
+        }
+        .faq-inner {
+            overflow: hidden;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .open .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        /* Subtle Fade In */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#050505]/90 backdrop-blur-md border-b border-[#222]">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-xl font-display font-bold tracking-tight uppercase" aria-label="Ir al inicio">
+                Aether
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-[#888]" aria-label="Navegación principal">
+                <a href="#servicios" class="hover:text-white transition-colors" aria-label="Ver servicios de automatización">Servicios</a>
+                <a href="#beneficios" class="hover:text-white transition-colors" aria-label="Ver beneficios de la IA">Beneficios</a>
+                <a href="#faq" class="hover:text-white transition-colors" aria-label="Preguntas Frecuentes">FAQ</a>
+            </nav>
+            <a href="#contacto" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-200 transition-colors flex items-center gap-2" aria-label="Solicitar contacto">
+                Hablemos <span class="text-lg leading-none" aria-hidden="true">→</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 border-b border-[#222] min-h-[90vh] flex flex-col justify-center">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-block border border-[#222] px-4 py-1.5 rounded-full text-xs font-medium tracking-wide text-[#888] uppercase mb-10 fade-in">
+                ✦ Agencia de Inteligencia Artificial B2B
+            </div>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-normal tracking-tight leading-[1.1] mb-8 max-w-4xl mx-auto text-balance fade-in delay-100">
+                Solucionamos tu cuello de botella <span class="text-neutral-400 italic">creando un software trabajando 24/7</span> para tu negocio.
+            </h1>
+            <p class="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mb-14 font-light tracking-wide fade-in delay-200">
+                Ahorrándote decenas de horas a la semana, e incrementando tu facturación.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in delay-300">
+                <a href="#contacto" class="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-full text-base font-semibold hover:bg-gray-200 transition-colors flex items-center justify-center gap-2" aria-label="Pedir presupuesto de automatización con IA">
+                    Pedir presupuesto <span aria-hidden="true">→</span>
+                </a>
+                <a href="#servicios" class="w-full sm:w-auto border border-[#222] bg-transparent text-white px-8 py-4 rounded-full text-base font-medium hover:bg-[#111] transition-colors flex items-center justify-center" aria-label="Ver cómo funciona nuestra IA">
+                    Ver cómo funciona
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <div class="border-b border-[#222] overflow-hidden py-4 bg-[#0a0a0a]">
+        <div class="marquee-container text-sm md:text-base font-display font-medium uppercase tracking-widest text-[#555]">
+            <div class="flex-1 flex justify-around whitespace-nowrap px-4">
+                <span>Atención al cliente</span> <span class="text-[#333]">✦</span>
+                <span>Ventas</span> <span class="text-[#333]">✦</span>
+                <span>Gestión de datos</span> <span class="text-[#333]">✦</span>
+                <span>Procesos internos</span> <span class="text-[#333]">✦</span>
+                <span>Escalabilidad</span> <span class="text-[#333]">✦</span>
+            </div>
+            <div class="flex-1 flex justify-around whitespace-nowrap px-4">
+                <span>Atención al cliente</span> <span class="text-[#333]">✦</span>
+                <span>Ventas</span> <span class="text-[#333]">✦</span>
+                <span>Gestión de datos</span> <span class="text-[#333]">✦</span>
+                <span>Procesos internos</span> <span class="text-[#333]">✦</span>
+                <span>Escalabilidad</span> <span class="text-[#333]">✦</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Grid (Brutalist) -->
+    <section class="border-b border-[#222]">
+        <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#222]">
+            <div class="p-12 md:p-16 flex flex-col justify-center items-center text-center hover:bg-[#0a0a0a] transition-colors">
+                <span class="text-5xl md:text-6xl font-display font-bold mb-4">-80%</span>
+                <span class="text-[#888] font-medium text-sm md:text-base uppercase tracking-wide">en horas de tareas manuales</span>
+            </div>
+            <div class="p-12 md:p-16 flex flex-col justify-center items-center text-center hover:bg-[#0a0a0a] transition-colors">
+                <span class="text-5xl md:text-6xl font-display font-bold mb-4">24/7</span>
+                <span class="text-[#888] font-medium text-sm md:text-base uppercase tracking-wide">operativo sin descansos</span>
+            </div>
+            <div class="p-12 md:p-16 flex flex-col justify-center items-center text-center hover:bg-[#0a0a0a] transition-colors">
+                <span class="text-5xl md:text-6xl font-display font-bold mb-4">ROI</span>
+                <span class="text-[#888] font-medium text-sm md:text-base uppercase tracking-wide">Retorno de inversión medible</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-24 px-6 border-b border-[#222]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+                <h2 class="text-4xl md:text-5xl font-display font-bold tracking-tight">Automatización <br>con Inteligencia Artificial.</h2>
+                <p class="text-[#888] max-w-sm">Implementamos sistemas de IA que se integran directamente en el flujo de trabajo de tu empresa.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Service 1 -->
+                <div class="border border-[#222] p-8 md:p-12 group hover:border-[#444] transition-colors bg-[#080808]">
+                    <div class="flex justify-between items-start mb-16">
+                        <span class="text-[#555] font-display text-xl font-medium">01 —</span>
+                        <span class="text-2xl text-[#333] group-hover:text-white transition-colors" aria-hidden="true">⤢</span>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-display font-bold mb-4">Optimización de procesos</h3>
+                    <p class="text-[#888] leading-relaxed">
+                        Automatización completa de la atención al cliente, gestión inteligente de correos electrónicos corporativos, y procesos administrativos que frenan el crecimiento de tu equipo.
+                    </p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="border border-[#222] p-8 md:p-12 group hover:border-[#444] transition-colors bg-[#080808]">
+                    <div class="flex justify-between items-start mb-16">
+                        <span class="text-[#555] font-display text-xl font-medium">02 —</span>
+                        <span class="text-2xl text-[#333] group-hover:text-white transition-colors" aria-hidden="true">⤢</span>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-display font-bold mb-4">Aumento de facturación con IA</h3>
+                    <p class="text-[#888] leading-relaxed">
+                        Sistemas automatizados de seguimiento de leads, cualificación automática de prospectos y estrategias de upselling dinámico potenciadas por Inteligencia Artificial.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="beneficios" class="py-24 px-6 border-b border-[#222] bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-8">Tu Agencia <br>de IA B2B.</h2>
+                <p class="text-[#888] mb-8 text-lg">No vendemos software, construimos la infraestructura operativa del futuro para tu negocio.</p>
+                <a href="#contacto" class="inline-flex items-center gap-2 border-b border-white pb-1 font-medium hover:text-[#888] hover:border-[#888] transition-colors" aria-label="Agendar consulta de automatización">
+                    Agendar consulta <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="flex flex-col gap-8">
+                <div class="pb-8 border-b border-[#222]">
+                    <h4 class="text-xl font-display font-bold mb-3 flex items-center gap-4">
+                        <span class="text-[#555] text-sm">01 —</span> Integración a medida
+                    </h4>
+                    <p class="text-[#888] pl-11">
+                        Sistemas 100% adaptados a las herramientas que ya utilizas en tu día a día (CRM, ERP, WhatsApp, Slack, etc.). Sin curvas de aprendizaje complejas.
+                    </p>
+                </div>
+                <div class="pb-8 border-b border-[#222]">
+                    <h4 class="text-xl font-display font-bold mb-3 flex items-center gap-4">
+                        <span class="text-[#555] text-sm">02 —</span> Orientado a resultados
+                    </h4>
+                    <p class="text-[#888] pl-11">
+                        Nuestra arquitectura está diseñada con dos objetivos matemáticos: reducir costes operativos radicalmente y generar nuevas vías de venta.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 px-6 border-b border-[#222]">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-16">Preguntas Frecuentes sobre Automatización</h2>
+            
+            <div class="divide-y divide-[#222] border-t border-[#222]">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <button class="w-full py-6 flex justify-between items-center text-left hover:text-[#888] transition-colors focus:outline-none">
+                        <span class="text-lg font-display font-medium">¿Qué procesos puedo automatizar?</span>
+                        <span class="faq-icon text-2xl font-light text-[#555]">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-inner text-[#888] pb-6 leading-relaxed">
+                            Casi cualquier proceso digital repetitivo. Desde la captación y clasificación de clientes potenciales, envío de presupuestos, soporte al cliente en múltiples idiomas 24/7, hasta la gestión interna de inventario o bases de datos.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button class="w-full py-6 flex justify-between items-center text-left hover:text-[#888] transition-colors focus:outline-none">
+                        <span class="text-lg font-display font-medium">¿Necesito conocimientos técnicos?</span>
+                        <span class="faq-icon text-2xl font-light text-[#555]">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-inner text-[#888] pb-6 leading-relaxed">
+                            En absoluto. Nosotros nos encargamos del 100% del desarrollo, la implementación técnica y la conexión entre plataformas. Te entregamos un sistema "llave en mano" listo para operar.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button class="w-full py-6 flex justify-between items-center text-left hover:text-[#888] transition-colors focus:outline-none">
+                        <span class="text-lg font-display font-medium">¿Cuánto se tarda en implementar?</span>
+                        <span class="faq-icon text-2xl font-light text-[#555]">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-inner text-[#888] pb-6 leading-relaxed">
+                            Depende de la complejidad del flujo de trabajo, pero la mayoría de nuestras soluciones están operativas e integradas en tu negocio en cuestión de días tras la auditoría inicial.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contacto" class="py-12 px-6 bg-[#030303] text-center md:text-left">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col gap-2">
+                <a href="#" class="text-2xl font-display font-bold tracking-tight uppercase" aria-label="Volver al inicio de Aether">
+                    Aether
+                </a>
+                <p class="text-[#555] text-sm">&copy; 2026 Aether. Todos los derechos reservados.</p>
+            </div>
+            
+            <div class="flex items-center gap-6 text-sm font-medium">
+                <a href="mailto:contacto@aetherstudio.es" class="text-[#888] hover:text-white transition-colors" aria-label="Enviar correo electrónico a contacto@aetherstudio.es">
+                    contacto@aetherstudio.es
+                </a>
+                <a href="#" class="bg-[#222] text-white px-4 py-2 rounded text-xs hover:bg-[#333] transition-colors uppercase tracking-wider" aria-label="Contactar rápidamente por WhatsApp">
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Accordion -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const button = item.querySelector('button');
+                const content = item.querySelector('.faq-content');
+
+                button.addEventListener('click', () => {
+                    const isOpen = content.classList.contains('open');
+
+                    // Close all other accordions (optional, but good for clean UI)
+                    faqItems.forEach(otherItem => {
+                        otherItem.querySelector('.faq-content').classList.remove('open');
+                        otherItem.classList.remove('open');
+                    });
+
+                    // Toggle current
+                    if (!isOpen) {
+                        content.classList.add('open');
+                        item.classList.add('open');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
